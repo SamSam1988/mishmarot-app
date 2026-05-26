@@ -55,15 +55,14 @@ export async function POST(request: Request) {
     const users = await loadUsers();
 
     if (body.action === "changePassword" && typeof body.userId === "string" && typeof body.newPassword === "string") {
-      await saveUsers(users.map((u) => u.id === body.userId ? { ...u, password: body.newPassword } : u));
+      const newPassword = body.newPassword;
+      await saveUsers(users.map((u) => u.id === body.userId ? { ...u, password: newPassword } : u));
       return NextResponse.json({ ok: true });
     }
-
     if (body.action === "resetPassword" && typeof body.userId === "string") {
       await saveUsers(users.map((u) => u.id === body.userId ? { ...u, password: "1234" } : u));
       return NextResponse.json({ ok: true });
     }
-
     if (body.action === "addUser" && typeof body.username === "string" && typeof body.displayName === "string") {
       const newUser: User = {
         id: `user-${Date.now()}`,
@@ -75,12 +74,10 @@ export async function POST(request: Request) {
       await saveUsers([...users, newUser]);
       return NextResponse.json({ ok: true, user: newUser });
     }
-
     if (body.action === "deleteUser" && typeof body.userId === "string") {
       await saveUsers(users.filter((u) => u.id !== body.userId));
       return NextResponse.json({ ok: true });
     }
-
     return NextResponse.json({ error: "Invalid action" }, { status: 400 });
   } catch (e) {
     console.error(e);

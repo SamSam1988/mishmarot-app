@@ -72,7 +72,7 @@ export function StatsView({ shifts, soldiers }: Props) {
   }
 
   return (
-    <div className="p-4 space-y-6 overflow-y-auto">
+    <div style={{ height: "100%", overflowY: "auto", WebkitOverflowScrolling: "touch" }} className="p-4 space-y-6">
       <h2 className="text-lg font-bold text-white">סטטיסטיקות משמרות</h2>
 
       {/* Total hours bar chart */}

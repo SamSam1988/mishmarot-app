@@ -178,7 +178,7 @@ export default function Home() {
   ];
 
   return (
-    <div className="flex flex-col" style={{ height: "100dvh", overflow: "hidden" }}>
+    <div style={{ display: "flex", flexDirection: "column", height: "100dvh" }}>
       {/* Header */}
       <div className="flex items-center justify-between px-3 py-2 border-b border-zinc-800 bg-zinc-900">
         <div className="flex items-center gap-2">
@@ -216,7 +216,7 @@ export default function Home() {
       </div>
 
       {/* Content */}
-      <div className="flex-1 min-h-0 overflow-hidden">
+      <div style={{ flex: 1, minHeight: 0, position: "relative", overflow: "hidden" }}>
         {tab === "shifts" && (
           <ShiftsView
             loggedInUser={loggedInUser}

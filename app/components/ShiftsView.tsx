@@ -265,7 +265,7 @@ export function ShiftsView({
   const isNewDay = previewDate && lastShift && previewDate !== lastShift.date;
 
   return (
-    <div ref={containerRef} className="relative h-full overflow-y-auto pb-32">
+    <div ref={containerRef} style={{ height: "100%", overflowY: "auto", WebkitOverflowScrolling: "touch", position: "relative" }} className="pb-32">
       {showScrollButtons && (
         <div className="fixed bottom-24 left-0 right-0 flex justify-center gap-3 z-20 px-4">
           <button type="button"

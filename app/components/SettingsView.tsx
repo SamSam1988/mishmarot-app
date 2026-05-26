@@ -63,7 +63,7 @@ export function SettingsView({
   }
 
   return (
-    <div className="p-4 space-y-6 overflow-y-auto pb-20">
+    <div style={{ height: "100%", overflowY: "auto", WebkitOverflowScrolling: "touch" }} className="p-4 space-y-6 pb-20">
       <h2 className="text-lg font-bold text-white">הגדרות</h2>
 
       {/* Change my password — available to all */}

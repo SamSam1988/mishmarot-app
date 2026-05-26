@@ -287,9 +287,9 @@ export function ShiftsView({
           return (
             <div key={date}>
               <div className="sticky top-0 z-10 bg-zinc-950/90 py-2 border-b border-zinc-800 mb-2">
-                <p className="text-sm font-bold text-zinc-200">
+                <p className="text-base font-bold text-lime-400">
                   {formatDateHeader(date)}
-                  {specialLabel && <span className="mr-2 text-amber-400 text-xs">{specialLabel}</span>}
+                  {specialLabel && <span className="mr-2 text-amber-400 text-sm font-semibold">{specialLabel}</span>}
                 </p>
               </div>
 
@@ -341,15 +341,8 @@ export function ShiftsView({
 
         {/* New shift form */}
         <div className="rounded-2xl border border-zinc-700 bg-zinc-900 p-4 space-y-3 mt-4">
-          <p className="text-sm font-semibold text-zinc-200">הוסף משמרת חדשה</p>
+          <p className="text-sm font-semibold text-zinc-200">הוסף משמרת נוספת</p>
 
-          {lastShift ? (
-            <p className="text-xs text-zinc-400">
-              משמרת אחרונה: {formatDateHeader(lastShift.date)}, {formatHour(lastShift.startHour)}
-            </p>
-          ) : (
-            <p className="text-xs text-zinc-400">תחילת תקופת שירות: {periodStart}</p>
-          )}
 
           <div>
             <label className="text-xs text-zinc-400 block mb-1">שעת התחלה</label>

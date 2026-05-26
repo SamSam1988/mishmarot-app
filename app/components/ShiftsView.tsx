@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect, useRef, useCallback } from "react";
 import type { Shift, Soldier, User, SpecialDate } from "../data";
+import { ClockPicker } from "./ClockPicker";
 
 type Props = {
   loggedInUser: User;
@@ -96,6 +97,7 @@ export function ShiftsView({
   const [newSoldierPopup, setNewSoldierPopup] = useState<{ name: string } | null>(null);
   const [traineePopup, setTraineePopup] = useState<{ soldier: Soldier; onConfirm: () => void } | null>(null);
   const [longShiftPopup, setLongShiftPopup] = useState<{ onConfirm: () => void } | null>(null);
+  const [showClock, setShowClock] = useState(false);
   const [showScrollButtons, setShowScrollButtons] = useState(false);
   const currentRef = useRef<HTMLDivElement | null>(null);
   const lastRef = useRef<HTMLDivElement | null>(null);
@@ -131,7 +133,7 @@ export function ShiftsView({
   function handleSoldierInput(val: string) {
     setSoldierName(val);
     if (val.length < 1) { setAutocomplete([]); return; }
-    setAutocomplete(soldiers.filter((s) => s.name.includes(val)).slice(0, 5));
+    setAutocomplete(soldiers.filter((s) => s.name.includes(val)).sort((a, b) => a.name.localeCompare(b.name, "he")).slice(0, 5));
   }
 
   function handleBackupInput(idx: number, val: string) {
@@ -350,13 +352,12 @@ export function ShiftsView({
           )}
 
           <div>
-            <label className="text-xs text-zinc-400 block mb-1">שעת התחלה (0-23)</label>
-            <input
-              type="number" min={0} max={23} value={hour}
-              onChange={(e) => setHour(e.target.value)}
-              className="w-full rounded-xl border border-zinc-700 bg-zinc-800 px-3 py-2 text-sm text-white"
-              placeholder="למשל: 9"
-            />
+            <label className="text-xs text-zinc-400 block mb-1">שעת התחלה</label>
+            <button type="button" onClick={() => setShowClock(true)}
+              className="w-full rounded-xl border border-zinc-700 bg-zinc-800 px-3 py-2 text-sm text-white text-right flex items-center justify-between">
+              <span>{hour !== "" ? `${String(parseInt(hour)).padStart(2, "0")}:00` : "בחר שעה..."}</span>
+              <span className="text-zinc-400">🕐</span>
+            </button>
             {previewDate && (
               <p className={`text-xs mt-1 ${isNewDay ? "text-amber-400 font-semibold" : "text-zinc-400"}`}>
                 {isNewDay ? `⚠️ יום חדש: ${formatDateHeader(previewDate)}` : `תאריך: ${formatDateHeader(previewDate)}`}
@@ -446,6 +447,15 @@ export function ShiftsView({
             שיתוף ב-WhatsApp ({selected.size} משמרות)
           </button>
         </div>
+      )}
+
+      {/* Clock picker */}
+      {showClock && (
+        <ClockPicker
+          value={hour}
+          onChange={(h) => setHour(h)}
+          onClose={() => setShowClock(false)}
+        />
       )}
 
       {/* Long shift popup */}

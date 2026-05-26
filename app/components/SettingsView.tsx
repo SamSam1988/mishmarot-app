@@ -86,7 +86,7 @@ export function SettingsView({
       <div className="rounded-2xl border border-zinc-800 bg-zinc-900 p-4 space-y-3">
         <h3 className="text-sm font-semibold text-zinc-200">כוח האדם ({soldiers.length})</h3>
         <div className="space-y-2">
-          {soldiers.map((s) => (
+          {[...soldiers].sort((a, b) => a.name.localeCompare(b.name, "he")).map((s) => (
             <div key={s.id} className="flex items-center gap-2 rounded-xl border border-zinc-700 bg-zinc-800 px-3 py-2">
               <span className="flex-1 text-sm text-white">{s.name}</span>
               <button type="button" onClick={() => onSetTrainee(s.id, !s.isTrainee)}

@@ -244,7 +244,7 @@ export function ShiftsView({
     for (const s of sortedShifts) {
       if (!selected.has(s.id)) continue;
       if (s.date !== lastDate) {
-        lines.push(formatDateHeader(s.date));
+        lines.push(`*${formatDateHeader(s.date)}*`);
         lastDate = s.date;
       }
       lines.push(formatShiftText(s));

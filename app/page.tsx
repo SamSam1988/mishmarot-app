@@ -180,15 +180,21 @@ export default function Home() {
   return (
     <div className="flex flex-col h-screen">
       {/* Header */}
-      <div className="flex items-center justify-between px-4 py-3 border-b border-zinc-800 bg-zinc-900">
-        <h1 className="text-base font-bold text-white">שיבוצי משמרות</h1>
-        <button
-          type="button"
-          onClick={() => setLoggedInUser(null)}
-          className="text-xs text-zinc-400 hover:text-white"
-        >
-          יציאה ({loggedInUser.displayName})
-        </button>
+      <div className="flex items-center justify-between px-3 py-2 border-b border-zinc-800 bg-zinc-900">
+        <div className="flex items-center gap-2">
+          <img src="/logo.png" alt="לוגו" className="w-8 h-8 object-contain" />
+          <h1 className="text-sm font-bold text-white">שיבוצי משמרות</h1>
+        </div>
+        <div className="flex items-center gap-3">
+          <span className="text-xs text-zinc-300 font-semibold">{loggedInUser.displayName}</span>
+          <button
+            type="button"
+            onClick={() => setLoggedInUser(null)}
+            className="text-xs text-zinc-500 hover:text-white"
+          >
+            יציאה
+          </button>
+        </div>
       </div>
 
       {/* Tabs */}

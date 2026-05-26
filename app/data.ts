@@ -22,49 +22,32 @@ export type ShiftBackup = {
 
 export type Shift = {
   id: string;
-  date: string; // YYYY-MM-DD
-  startHour: number; // 0-23
+  date: string;
+  startHour: number;
   soldierId: string;
   soldierName: string;
   backups: ShiftBackup[];
   isPast: boolean;
   createdAt: number;
+  scheduledBy?: string;
 };
 
 export type SpecialDate = {
   id: string;
-  date: string; // YYYY-MM-DD
+  date: string;
   label: string;
 };
 
 export type AppSettings = {
-  periodStart: string; // YYYY-MM-DD
-  periodEnd: string;   // YYYY-MM-DD
+  periodStart: string;
+  periodEnd: string;
   specialDates: SpecialDate[];
 };
 
 export const defaultUsers: User[] = [
-  {
-    id: "user-shmuel",
-    username: "שמואל",
-    displayName: "שמואל",
-    password: "1234",
-    role: "admin",
-  },
-  {
-    id: "user-drori",
-    username: "דרורי",
-    displayName: "דרורי",
-    password: "1234",
-    role: "scheduler",
-  },
-  {
-    id: "user-ravivo",
-    username: "רביבו",
-    displayName: "רביבו",
-    password: "1234",
-    role: "scheduler",
-  },
+  { id: "user-shmuel", username: "שמואל", displayName: "שמואל", password: "1234", role: "admin" },
+  { id: "user-drori", username: "דרורי", displayName: "דרורי", password: "1234", role: "scheduler" },
+  { id: "user-ravivo", username: "רביבו", displayName: "רביבו", password: "1234", role: "scheduler" },
 ];
 
 export const defaultSoldiers: Soldier[] = [
